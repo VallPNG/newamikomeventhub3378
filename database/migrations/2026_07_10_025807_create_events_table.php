@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('category_id')->constrained()->cascadeOnDelete();
+            $table->string('title');
+            $table->text('description');
+            $table->string('image')->nullable();
+            $table->string('location');
+            $table->dateTime('event_date');
+            $table->decimal('price', 15, 2); // 15 digit, 2 desimal
+            $table->integer('stock');
             $table->timestamps();
         });
     }

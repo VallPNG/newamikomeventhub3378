@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('transaction_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('event_id')->constrained()->cascadeOnDelete();
+            $table->string('ticket_code')->unique();
+            $table->enum('status', ['valid', 'used'])->default('valid');
             $table->timestamps();
         });
     }

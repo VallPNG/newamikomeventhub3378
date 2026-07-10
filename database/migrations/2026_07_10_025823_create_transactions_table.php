@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->string('order_id')->unique();
+            $table->decimal('total_amount', 15, 2);
+            $table->enum('status', ['pending', 'paid', 'failed', 'expired'])->default('pending');
+            $table->string('snap_token')->nullable();
             $table->timestamps();
         });
     }
